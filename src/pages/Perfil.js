@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Layout from '../layouts/Layout';
 
 const Perfil = () => {
     const [isActive, setIsActive] = useState(true);
@@ -6,8 +7,8 @@ const Perfil = () => {
     const handleActive = () => setIsActive(!isActive);
 
     return (
-        <div className='container mx-auto p-3'>
-            <h1 className='font-semibold text-xl'>Perfil</h1>
+        <Layout>
+            <h1 className='text-2xl font-bold'>Perfil</h1>
             <article className='grid grid-cols-12 gap-x-4 gap-y-9'>
                 <div className='col-span-12 md:col-span-4'>
                     <aside className='shadow-lg p-3 flex items-center'>
@@ -29,7 +30,7 @@ const Perfil = () => {
                             <input
                                 type="text"
                                 disabled={isActive}
-                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:border-none focus:outline-2 focus:outline-pink-700'
+                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:outline-2 focus:outline-pink-700'
                             />
                         </div>
                         <div className='flex flex-col col-span-12'>
@@ -37,7 +38,7 @@ const Perfil = () => {
                             <input
                                 type="text"
                                 disabled={isActive}
-                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:border-none focus:outline-2 focus:outline-pink-700'
+                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:outline-2 focus:outline-pink-700'
                             />
                         </div>
                         <div className='flex flex-col col-span-12'>
@@ -45,7 +46,7 @@ const Perfil = () => {
                             <input
                                 type="text"
                                 disabled={isActive}
-                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:border-none focus:outline-2 focus:outline-pink-700'
+                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:outline-2 focus:outline-pink-700'
                             />
                         </div>
                         <div className='flex flex-col col-span-12 md:col-span-6'>
@@ -53,7 +54,7 @@ const Perfil = () => {
                             <input
                                 type="text"
                                 disabled={isActive}
-                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:border-none focus:outline-2 focus:outline-pink-700'
+                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:outline-2 focus:outline-pink-700'
                             />
                         </div>
                         <div className='flex flex-col col-span-12 md:col-span-6'>
@@ -61,7 +62,7 @@ const Perfil = () => {
                             <input
                                 type="text"
                                 disabled={isActive}
-                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:border-none focus:outline-2 focus:outline-pink-700'
+                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:outline-2 focus:outline-pink-700'
                             />
                         </div>
                         <div className='flex flex-col col-span-12 md:col-span-6'>
@@ -69,7 +70,7 @@ const Perfil = () => {
                             <input
                                 type="date"
                                 disabled={isActive}
-                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:border-none focus:outline-2 focus:outline-pink-700'
+                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:outline-2 focus:outline-pink-700'
                             />
                         </div>
                         <div className='flex flex-col col-span-12 md:col-span-6'>
@@ -78,7 +79,7 @@ const Perfil = () => {
                                 name=""
                                 id=""
                                 disabled={isActive}
-                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:border-none focus:outline-2 focus:outline-pink-700'
+                                className='px-2 py-1 disabled:text-gray-400 bg-inherit mt-1 border border-gray-400 rounded-md focus:outline-2 focus:outline-pink-700'
                             >
                                 <option value="">- - -</option>
                                 <option value="">Hombre</option>
@@ -100,7 +101,7 @@ const Perfil = () => {
                     </button>
                 </div>
             </article>
-        </div>
+        </Layout>
     )
 }
 

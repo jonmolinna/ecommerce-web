@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Carrito from '../pages/Carrito';
 import Hombre from '../pages/Hombre';
 import Home from '../pages/Home';
@@ -9,16 +9,40 @@ import Perfil from '../pages/Perfil';
 import ProductView from '../pages/ProductView';
 import Register from '../pages/Register';
 
+import { AuthContext } from '../context/auth';
+
 const AppRouter = () => {
+    const { user } = useContext(AuthContext);
+    console.log('YOOOO', user);
+
+
     return (
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/mujer" component={Mujer} />
             <Route exact path="/hombre" component={Hombre} />
-            <Route exact path="/login" component={Login} /> 
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/perfil" component={Perfil} />
-            <Route exact path="/product/:ID" component={ProductView} />
+            <Route
+                exact 
+                path="/login"
+                render={() => (
+                    user? <Redirect to='/perfil' /> : <Login />
+                )}
+            /> 
+            <Route
+                exact
+                path="/register"
+                render={() => (
+                    user? <Redirect to='/perfil' /> : <Register />
+                )}
+            />
+            <Route 
+                exact 
+                path="/perfil"
+                render={() => (
+                    user? <Perfil /> : <Redirect to='/login' /> 
+                )}
+            />
+            <Route exact path="/product/:IdProduct" component={ProductView} />
             <Route exact path="/carrito" component={Carrito} />
         </Switch>
     )

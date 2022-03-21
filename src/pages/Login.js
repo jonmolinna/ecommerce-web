@@ -39,15 +39,21 @@ const Login = () => {
 
     return (
         <div className='w-full flex flex-col items-center'>
-            <h2 className='mt-5 text-4xl tracking-widest'>
-                {
-                    loading? 'Cargando ...' : 'Dallase'
-                }
-            </h2>
+            <Link
+                to='/' 
+                className='mt-5 text-4xl tracking-widest'
+            >
+                Dallase
+            </Link>
             <div
                 className='flex flex-col items-center w-11/12 max-w-md border-4 shadow-lg border-white bg-white rounded-md mt-3 py-3 px-3 md:py-5 md:px-10'
             >
                 <h3 className='text-xl mb-2'>Iniciar sesión</h3>
+                {
+                    loading && (
+                        <p className='text-center font-semibold mb-2 text-lg'>Cargando ...</p>
+                    )
+                }
                 {
                     errors && (
                         <div className='bg-pink-500 w-full p-2 mb-3 rounded-md text-center'>

@@ -1,14 +1,13 @@
 import React from 'react';
 import ProductCar from '../components/ProductCar';
+import Layout from '../layouts/Layout';
 
 const Carrito = () => {
     return (
-        <div className='container mx-auto p-3'>
+        <Layout>
             <h1 className='text-2xl font-bold'>Carrito</h1>
             <article className='grid grid-cols-12 gap-x-4 gap-y-5'>
                 <aside className='col-span-12 md:col-span-7'>
-                    <ProductCar />
-                    <ProductCar />
                     <ProductCar />
                     <ProductCar />
                     <ProductCar />
@@ -38,7 +37,7 @@ const Carrito = () => {
                     </div>
                 </aside>
             </article>
-        </div>
+        </Layout>
     )
 }
 

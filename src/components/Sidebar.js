@@ -10,40 +10,20 @@ const Sidebar = () => {
                         Genero
                     </h2>
                     <div className='flex flex-col'>
-                        <button className='bg-pink-700 text-white mt-1 p-1 rounded-lg'>
+                        <Link 
+                            to='/mujer'
+                            className='bg-pink-700 shadow-md shadow-pink-700/50 text-white text-center mt-2 p-1 rounded-lg'  
+                        >
                             Mujer
-                        </button>
-                        <button className='bg-pink-700 text-white mt-1 p-1 rounded-lg'>
+                        </Link>
+                        <Link 
+                            to='/hombre'
+                            className='bg-pink-700 shadow-md shadow-pink-700/50 text-white text-center mt-2 p-1 rounded-lg'
+                        >
                             Hombre
-                        </button>
+                        </Link>
                     </div>
                 </article>
-                {/* <article className='mt-1'>
-                    <h2 className='p-2 border-b border-gray-400 text-lg font-semibold'>
-                        Categoría
-                    </h2>
-                    <div className='flex flex-col'>
-                        <div>
-                            <input type="checkbox" className='bg-pink-700' />
-                            <label htmlFor="" className='ml-2'>Polos</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" />
-                            <label htmlFor="" className='ml-2'>Camisas</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" />
-                            <label htmlFor="" className='ml-2'>Poleras</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" />
-                            <label htmlFor="" className='ml-2'>Jeans</label>
-                        </div>
-                    </div>
-                    <button className='bg-pink-700 text-white w-full p-1 rounded-md'>
-                        Aplicar
-                    </button>
-                </article> */}
             </div>
         </div>
     )
