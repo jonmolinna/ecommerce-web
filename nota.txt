@@ -1,0 +1,17 @@
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+npm install react-router-dom@5.3.0
+npm install graphql
+npm install @apollo/client
+
+npm install graphql
+npm install apollo-client
+npm install @apollo/react-hooks
+npm install graphql-tag
+npm install apollo-cache-inmemory
+npm install apollo-link-http
+npm install axios
+npm install jwt-decode
+npm install moment
+npm install react-hot-toast
