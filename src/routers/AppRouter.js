@@ -13,9 +13,7 @@ import { AuthContext } from '../context/auth';
 
 const AppRouter = () => {
     const { user } = useContext(AuthContext);
-    console.log('YOOOO', user);
-
-
+    
     return (
         <Switch>
             <Route exact path="/" component={Home} />

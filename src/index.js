@@ -2,10 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:9000/',
+});
+
+const authLink = setContext(() => {
+  const token = localStorage.getItem('e-commerce-dallase');
+  return {
+    headers: {
+      Authorization: token? `Bearer ${token}` : ''
+    }
+  }
+});
 
 const client = new ApolloClient({
-  uri: "http://localhost:9000/",
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

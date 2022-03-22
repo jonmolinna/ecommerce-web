@@ -29,7 +29,7 @@ const Footer = () => {
                 </div>
             </aside>
             <aside className='text-center mt-5'>
-                <p className='font-normal'>Dallase 2021 © Todos los derechos reservados</p>
+                <p className='font-normal'>Dallase 2022 © Todos los derechos reservados</p>
             </aside>
         </div>
     )
