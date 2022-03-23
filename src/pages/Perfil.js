@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Layout from '../layouts/Layout';
 import { useHistory } from 'react-router-dom';
+import { useMutation, useQuery } from '@apollo/client';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { AuthContext } from '../context/auth';
 import { Capitalize } from '../util/capitalize';
 import { chatAt } from '../util/chatAt';
-import { gql, useQuery } from '@apollo/client';
+import { GET_ONE_USER } from '../graphql/query';
+import { UPDATED_USER } from '../graphql/mutation';
 
 const initialForm = {
     nombre: "",
@@ -19,6 +22,7 @@ const initialForm = {
 const Perfil = () => {
     const [isActive, setIsActive] = useState(true);
     const [form, setForm] = useState(initialForm);
+    const [errors, setErrors] = useState(null);
     const { logout, user } = useContext(AuthContext);
     let history = useHistory();
 
@@ -36,15 +40,32 @@ const Perfil = () => {
         });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(form);
-    }
-
     const { data } = useQuery(GET_ONE_USER, {
         variables: {
             userId: user.id
         },
+    });
+
+    const dataUser = data?.getUser;
+
+    const [ updatedUser ] = useMutation(UPDATED_USER, {
+        update() {
+            setIsActive(!isActive);
+            setErrors(null);
+            toast.success('Usuario se acutalizo');
+        },
+        onError(err) {
+            setErrors(err.graphQLErrors[0].extensions.errors);
+        },
+        variables: {
+            id: user.id,
+            nombre: form.nombre,
+            apellido: form.apellido,
+            dni: form.dni,
+            telefono: form.telefono,
+            fech_nacimiento: form.fech_nacimiento,
+            genero: form.genero,
+        }
     });
 
     useEffect(() => {
@@ -63,10 +84,6 @@ const Perfil = () => {
 
     }, [data]);
 
-    console.log('YOOOO', data);
-
-    console.log('YOOOOOOOOOOOOOO');
-
     return (
         <Layout>
             <h1 className='text-2xl font-bold'>Perfil</h1>
@@ -76,14 +93,14 @@ const Perfil = () => {
                         <small 
                             className='bg-pink-700 text-white h-11 w-11 text-3xl font-semibold flex items-center justify-center rounded-full'
                         >
-                            { chatAt(user.nombre) }
+                            { dataUser && chatAt(dataUser?.nombre) }
                         </small>
                         <aside className='ml-3'>
                             <h3 className='font-medium'>
-                                { Capitalize(user.nombre) } { Capitalize(user.apellido) }
+                                { dataUser && Capitalize(dataUser?.nombre) } { dataUser && Capitalize(dataUser?.apellido) }
                             </h3>
                             <small>
-                                { user.email }
+                                { dataUser && dataUser?.email }
                             </small>
                         </aside>
                     </aside>
@@ -96,7 +113,7 @@ const Perfil = () => {
                 </div>
                 <div className='col-span-12 md:col-span-8 shadow-lg p-3'>
                     <form
-                        onSubmit={handleSubmit} 
+                        onSubmit={(e) => updatedUser(e.preventDefault())} 
                         className='grid grid-cols-12 gap-x-3 gap-y-4'
                     >
                         <div className='flex flex-col col-span-12'>
@@ -181,28 +198,30 @@ const Perfil = () => {
                     >
                         { isActive? 'Editar' : 'Cancelar'}
                     </button>
+                    {
+
+                        errors && <div className='mt-3 mb-2 w-full'>
+
+                            {
+                                Object.values(errors).map((value, index) => (
+                                    <p key={index} className="text-pink-700 font-semibold">
+                                        { value }
+                                    </p>
+                                ))
+                            }
+                        </div>
+                    }
                 </div>
             </article>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+                toastOptions= {{
+                    duration: 5000
+                }}
+            />
         </Layout>
     )
 };
-
-const GET_ONE_USER = gql`
-    query getUser(
-        $userId: ID!
-    ){
-        getUser(
-            userId: $userId
-        ){
-            id
-            nombre
-            apellido
-            dni
-            telefono
-            fech_nacimiento
-            genero
-        }
-    }
-`;
 
 export default Perfil
