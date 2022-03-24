@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import { AuthContext } from '../context/auth';
+import { LOGIN_USER } from '../graphql/mutation';
 
 const initialForm = {
     email: '',
@@ -51,7 +52,9 @@ const Login = () => {
                 <h3 className='text-xl mb-2'>Iniciar sesión</h3>
                 {
                     loading && (
-                        <p className='text-center font-semibold mb-2 text-lg'>Cargando ...</p>
+                        <p className='text-center font-semibold mb-2 text-lg'>
+                            Cargando ...
+                        </p>
                     )
                 }
                 {
@@ -104,23 +107,5 @@ const Login = () => {
         </div>
     )
 };
-
-const LOGIN_USER = gql`
-    mutation login(
-        $email: String!,
-        $password: String!,
-    ){
-        login(
-            email: $email,
-            password: $password,
-        ){
-            id
-            nombre
-            apellido
-            email
-            token
-        }
-    }
-`;
 
 export default Login;

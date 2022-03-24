@@ -1,7 +1,9 @@
 import React from 'react';
 import Container from '../layouts/Container';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Product from '../components/Product';
+
+import { GET_WOMAN_PRODUCTS } from '../graphql/query';
 
 const Mujer = () => {
     const { data, loading } = useQuery(GET_WOMAN_PRODUCTS, {
@@ -28,23 +30,5 @@ const Mujer = () => {
         </Container>
     )
 };
-
-const GET_WOMAN_PRODUCTS = gql`
-    query getAllProducts(
-        $genero: String
-    ){
-        getAllProducts(
-            filter: {
-                genero: $genero
-            }
-        ){
-            id
-            codigo
-            marca
-            precio
-            urlImage
-        }
-    }
-`;
 
 export default Mujer;

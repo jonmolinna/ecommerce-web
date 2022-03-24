@@ -1,6 +1,8 @@
 import React from 'react';
 import Product from './Product';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+
+import { GET_ALL_PRODUCTS } from '../graphql/query';
 
 const Products = () => {
     const {  data, loading } = useQuery(GET_ALL_PRODUCTS);
@@ -23,17 +25,5 @@ const Products = () => {
         </div>
     )
 };
-
-const GET_ALL_PRODUCTS = gql`
-    query {
-        getAllProducts {
-            id
-            codigo
-            marca
-            precio
-            urlImage
-        }
-    }
-`;
 
 export default Products;
