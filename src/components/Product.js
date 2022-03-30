@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { formatMoney } from '../util/fomartMoney';
+
 const Product = ({ product }) => {
     const { id, codigo, marca, precio, urlImage, createdAt } = product;
     let createdProduct = new Date(createdAt).getTime();
@@ -32,7 +34,7 @@ const Product = ({ product }) => {
                     { codigo }
                 </p>
                 <small className='font-semibold text-base'>
-                    S/ { precio }
+                    S/ { formatMoney(precio) }
                 </small>
             </article>
         </Link>

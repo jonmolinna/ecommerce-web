@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout';
 import { Link } from 'react-router-dom';
 
 import { CartContext } from '../context/shoppingCar';
+import { formatMoney } from '../util/fomartMoney';
 
 const Carrito = () => {
     const { cart } = useContext(CartContext);
@@ -31,7 +32,7 @@ const Carrito = () => {
                                 <div className='flex justify-between'>
                                     <p className='font-normal'>Subtotal ({quantityProduct} productos)</p>
                                     <p className='font-normal'>
-                                        S/ { priceTotalProduct }
+                                        S/ { formatMoney(priceTotalProduct) }
                                     </p>
                                 </div>
                                 <div className='flex justify-between'>
@@ -41,7 +42,7 @@ const Carrito = () => {
                                 <div className='flex justify-between my-3'>
                                     <p className='font-bold text-lg'>Total</p>
                                     <p className='font-bold text-lg'>
-                                        S/ { priceTotalProduct }
+                                        S/ { formatMoney(priceTotalProduct) }
                                     </p>
                                 </div>
                             </article>

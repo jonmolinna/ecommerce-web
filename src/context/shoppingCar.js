@@ -7,7 +7,9 @@ const initialState = {
 const CartContext = createContext({
     cart: [],
     addToCart: (product) => {},
-    // deleteOneProductToCar: (product) => {},
+    deleteOneProductToCar: (product) => {},
+    sumOneQuantityProductToCar: (product) => {},
+    resOneQuantityProductToCar: (product) => {},
 });
 
 function cartReducer(state, action) {
@@ -26,19 +28,36 @@ function cartReducer(state, action) {
         }
         case 'DELETE_ONE_PRODUCT_FROM_CART': {
             let product = action.payload;
-            console.log('YOOOO>>>>D', product);
-            return {
+            let productCart = state.cart.find(item => item.id === product.id && item.talla === product.talla);
+            console.log('YOO', product);
+            console.log('>>>>>', productCart);
+            return productCart?
+            {
                 ...state,
-                cart: state.cart.filter(item => item.id !== product.id && item.talla === product.talla),
+                cart: state.cart.filter(item => (item.id !== product.id && item.talla === product.talla))
+            } : {
+                ...state
             }
         }
         case 'ADD_ONE_QUANTITY_CART': {
-            return {
+            let product = action.payload;
+            let productCart = state.cart.find(item => item.id === product.id && item.talla === product.talla);
+            return productCart?.quantity > 0 ?
+            {
+                ...state,
+                cart: state.cart.map(item => item.id === product.id && item.talla === product.talla? { ...item, quantity: item.quantity + 1} : item)
+            } : {
                 ...state,
             }
         }
         case 'REMOVE_ONE_QUANTITY_CART': {
-            return {
+            let product = action.payload;
+            let productCart = state.cart.find(item => item.id === product.id && item.talla === product.talla);
+            return productCart?.quantity > 1 ?
+            {
+                ...state,
+                cart: state.cart.map(item => item.id === product.id && item.talla === product.talla? { ...item, quantity: item.quantity - 1} : item)
+            } : {
                 ...state,
             }
         }
@@ -64,9 +83,23 @@ function CartProvider(props) {
         })
     };
 
+    function sumOneQuantityProductToCar(product) {
+        dispatch({
+            type: 'ADD_ONE_QUANTITY_CART',
+            payload: product,
+        })
+    };
+
+    function resOneQuantityProductToCar(product) {
+        dispatch({
+            type: "REMOVE_ONE_QUANTITY_CART",
+            payload: product,
+        })
+    }
+
     return (
         <CartContext.Provider
-            value={{ cart: state.cart, addToCart, deleteOneProductToCar }}
+            value={{ cart: state.cart, addToCart, deleteOneProductToCar, sumOneQuantityProductToCar, resOneQuantityProductToCar }}
             { ...props }
         />
     )

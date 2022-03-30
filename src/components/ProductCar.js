@@ -2,12 +2,11 @@ import React, { useContext } from 'react';
 
 import { chatAt } from '../util/chatAt';
 import { CartContext } from '../context/shoppingCar';
+import { formatMoney } from '../util/fomartMoney';
 
 const ProductCar = ({ product }) => {
     const priceTotalProduct = product.precio * product.quantity;
-    const { deleteOneProductToCar } = useContext(CartContext);
-
-    console.log('>>>>>', product);
+    const { deleteOneProductToCar, sumOneQuantityProductToCar, resOneQuantityProductToCar } = useContext(CartContext);
 
     return (
         <div className='grid grid-cols-12 gap-x-4 shadow-md mb-4'>
@@ -35,13 +34,14 @@ const ProductCar = ({ product }) => {
                 <div className='flex mt-2'>
                     <small className='text-sm mr-1'>Precio:</small>
                     <small className='text-sm'>
-                        S/ { product.precio }
+                        S/ { formatMoney(product.precio) }
                     </small>
                 </div>
                 <div className='flex flex-row items-center'>
                     <small className='text-sm mr-7'>Cantidad:</small>
                     <div className='flex items-center'>
                         <button
+                            onClick={() => resOneQuantityProductToCar(product)}
                             className='border-2 border-pink-700 w-6 h-6 rounded-full font-bold text-xl flex items-center justify-center p-2 active:bg-pink-700'
                         >
                             -
@@ -49,7 +49,8 @@ const ProductCar = ({ product }) => {
                         <small className='mx-3 text-lg font-normal'>
                             { product.quantity }
                         </small>
-                        <button 
+                        <button
+                            onClick={() => sumOneQuantityProductToCar(product)}
                             className='border-2 border-pink-700 w-6 h-6 rounded-full font-bold text-xl flex items-center justify-center p-2 active:bg-pink-700'
                         >
                             +
@@ -59,7 +60,7 @@ const ProductCar = ({ product }) => {
                 <div className='flex mt-3'>
                     <p className='text-lg font-semibold mr-2'>Total:</p>
                     <p className='text-lg font-semibold'>
-                        S/ {priceTotalProduct}
+                        S/ {formatMoney(priceTotalProduct)}
                     </p>
                 </div>
                 <button 
