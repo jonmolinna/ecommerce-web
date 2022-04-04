@@ -5,3 +5,38 @@
 body {
   background-color: #eeeeee;
 }
+
+.lbl-genero {
+  display: inline-block;
+  width: 55px;
+  height: 30px;
+  background-color: #aaa;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.radio-genero:checked ~ .lbl-genero {
+  background-color: #be185d;
+}
+
+.lbl-genero::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 100px;
+  top: 4px;
+  left: 5px;
+  transition: 0.3s;
+}
+
+.radio-genero:checked ~ .lbl-genero::after {
+  left: 28px;
+}
+
+.radio-genero {
+  display: none;
+}

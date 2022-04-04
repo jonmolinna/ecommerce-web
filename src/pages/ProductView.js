@@ -38,6 +38,7 @@ const ProductView = () => {
         ));
 
         const productCart = {
+            idShopping: new Date().getTime(),
             id: product.id,
             codigo: product.codigo,
             marca: product.marca,

@@ -1,18 +1,21 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import AppRouter from './routers/AppRouter';
-import { AuthProvider  } from './context/auth';
-import { CartProvider  } from './context/shoppingCar';
+import AppRouter from "./routers/AppRouter";
+import { AuthProvider } from "./context/auth";
+import { CartProvider } from "./context/shoppingCar";
+import { CategoryProvider } from "./context/categoryProduct";
 
 function App() {
   return (
     <div>
       <AuthProvider>
         <CartProvider>
-          <Router>
+          <CategoryProvider>
+            <Router>
               <AppRouter />
-          </Router>
+            </Router>
+          </CategoryProvider>
         </CartProvider>
       </AuthProvider>
     </div>

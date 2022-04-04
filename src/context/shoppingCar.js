@@ -29,12 +29,10 @@ function cartReducer(state, action) {
         case 'DELETE_ONE_PRODUCT_FROM_CART': {
             let product = action.payload;
             let productCart = state.cart.find(item => item.id === product.id && item.talla === product.talla);
-            console.log('YOO', product);
-            console.log('>>>>>', productCart);
             return productCart?
             {
                 ...state,
-                cart: state.cart.filter(item => (item.id !== product.id && item.talla === product.talla))
+                cart: state.cart.filter(item => item.idShopping !== productCart.idShopping),
             } : {
                 ...state
             }
