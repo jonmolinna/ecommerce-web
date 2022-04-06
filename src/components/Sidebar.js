@@ -1,30 +1,29 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { CategoryContext } from "../context/categoryProduct";
 
 const Sidebar = () => {
   const [genero, setGenero] = useState("");
   let history = useHistory();
-  const { addToGenero, genero: generoContext } = useContext(CategoryContext);
+  const { addToGenero } = useContext(CategoryContext);
+  let location = useLocation().pathname.split("/")[1];
 
   const handleClick = () => {
-    history.push(`/${genero}`);
-    addToGenero(genero);
-  };
-
-  useEffect(() => {
-    if (generoContext) {
-      setGenero(generoContext);
+    if (location) {
+      console.log("Hola Mundo");
+    } else {
+      history.push(`/${genero}`);
+      addToGenero(genero);
     }
-  }, [generoContext]);
+  };
 
   return (
     <div className="w-full bg-inherit">
       <div className="border border-gray-400 rounded-md p-2">
         <article>
           <h2 className="p-2 border-b border-gray-400 text-lg font-semibold">
-            Genero
+            {location ? "Categoria" : "Genero"}
           </h2>
           <div className="">
             <div className="mt-2 flex flex-col">
@@ -36,7 +35,6 @@ const Sidebar = () => {
                   value="mujer"
                   onChange={(e) => setGenero(e.target.value)}
                   className="radio-genero"
-                  checked={genero === "mujer"}
                 />
                 <label htmlFor="mujer" className="lbl-genero"></label>
                 Mujer
@@ -49,7 +47,6 @@ const Sidebar = () => {
                   value="hombre"
                   onChange={(e) => setGenero(e.target.value)}
                   className="radio-genero"
-                  checked={genero === "hombre"}
                 />
                 <label htmlFor="hombre" className="lbl-genero"></label>
                 Hombre

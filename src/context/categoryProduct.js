@@ -2,11 +2,13 @@ import React, { createContext, useReducer } from "react";
 
 const initialState = {
   genero: "",
+  categoryWoman: [],
 };
 
 const CategoryContext = createContext({
   genero: "",
   addToGenero: (genero) => "",
+  addToCategoryWoman: (productMan) => [],
 });
 
 function categoryReducer(state, action) {
@@ -21,6 +23,12 @@ function categoryReducer(state, action) {
         : {
             ...state,
           };
+    }
+    case "ADD_CATEGORY_WOMAN": {
+      console.log("Context", action.payload);
+      return {
+        ...state,
+      };
     }
     default:
       return state;
@@ -37,9 +45,16 @@ function CategoryProvider(props) {
     });
   }
 
+  function addToCategoryWoman(productWoman) {
+    dispatch({
+      type: "ADD_CATEGORY_WOMAN",
+      payload: productWoman,
+    });
+  }
+
   return (
     <CategoryContext.Provider
-      value={{ genero: state.genero, addToGenero }}
+      value={{ genero: state.genero, addToGenero, addToCategoryWoman }}
       {...props}
     />
   );
